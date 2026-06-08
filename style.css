@@ -95,3 +95,19 @@ tr:last-child td {
 .btn-generate:active {
   transform: scale(0.98);
 }
+
+footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.78rem;
+  color: #555570;
+}
+
+footer a {
+  color: #555570;
+  text-decoration: underline;
+}
+
+footer a:hover {
+  color: #a0a0b0;
+}
