@@ -72,23 +72,27 @@
       <div class="form-row">
         <div class="form-group">
           <label>Engine</label>
-          <input type="text" id="f-engine" placeholder="Unreal Engine 5">
+          <select id="f-engine">
+            <option value="">선택하세요</option>
+            <option value="Unreal Engine 5">Unreal Engine 5</option>
+            <option value="Unity">Unity</option>
+            <option value="Godot">Godot</option>
+            <option value="GameMaker Studio 2">GameMaker Studio 2</option>
+            <option value="Defold">Defold</option>
+            <option value="Pygame">Pygame</option>
+          </select>
         </div>
         <div class="form-group">
           <label>Language</label>
-          <input type="text" id="f-language" placeholder="C++">
+          <input type="text" id="f-language" placeholder="엔진 선택 시 자동 입력" readonly>
         </div>
       </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label>Target Platform</label>
-          <input type="text" id="f-targetplatform" placeholder="PC (Windows)">
-        </div>
-        <div class="form-group">
-          <label>IDE / Editor</label>
-          <input type="text" id="f-ide" placeholder="Rider, VS Code">
-        </div>
+      <div class="form-group">
+        <label>IDE / Editor</label>
+        <select id="f-ide" disabled>
+          <option value="">엔진을 먼저 선택하세요</option>
+        </select>
       </div>
 
       <button id="downloadBtn" class="btn-generate" style="margin-top:8px;">README.md 다운로드</button>

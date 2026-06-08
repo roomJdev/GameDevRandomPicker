@@ -31,6 +31,52 @@ function generate() {
   document.getElementById('r-action').textContent = pick(DATA.action);
 }
 
+const ENGINE_DATA = {
+  'Unreal Engine 5': {
+    language: 'C++ / Blueprints',
+    ides: ['Rider', 'Visual Studio', 'VS Code'],
+  },
+  'Unity': {
+    language: 'C#',
+    ides: ['Rider', 'Visual Studio', 'VS Code'],
+  },
+  'Godot': {
+    language: 'GDScript / C#',
+    ides: ['Godot Built-in Editor', 'VS Code', 'Rider'],
+  },
+  'GameMaker Studio 2': {
+    language: 'GML (GameMaker Language)',
+    ides: ['GameMaker Studio 2 Built-in Editor'],
+  },
+  'Defold': {
+    language: 'Lua',
+    ides: ['Defold Editor', 'VS Code'],
+  },
+  'Pygame': {
+    language: 'Python',
+    ides: ['VS Code', 'PyCharm'],
+  },
+};
+
+document.getElementById('f-engine').addEventListener('change', function () {
+  const data = ENGINE_DATA[this.value];
+  const langInput = document.getElementById('f-language');
+  const ideSelect = document.getElementById('f-ide');
+
+  if (!data) {
+    langInput.value = '';
+    ideSelect.innerHTML = '<option value="">엔진을 먼저 선택하세요</option>';
+    ideSelect.disabled = true;
+    return;
+  }
+
+  langInput.value = data.language;
+  ideSelect.disabled = false;
+  ideSelect.innerHTML = data.ides
+    .map(ide => `<option value="${ide}">${ide}</option>`)
+    .join('');
+});
+
 document.getElementById('generateBtn').addEventListener('click', () => {
   generate();
   document.getElementById('readmeForm').classList.remove('hidden');
@@ -58,10 +104,9 @@ function downloadReadme() {
   const mechanics   = val('f-mechanics')    || '(미작성)';
   const ui          = val('f-ui')           || '(미작성)';
   const others      = val('f-others')       || '(미작성)';
-  const engine      = val('f-engine')       || '—';
-  const language    = val('f-language')     || '—';
-  const targetPlatform = val('f-targetplatform') || '—';
-  const ide         = val('f-ide')          || '—';
+  const engine   = document.getElementById('f-engine').value  || '—';
+  const language = val('f-language') || '—';
+  const ide      = document.getElementById('f-ide').value     || '—';
 
   const controlTable = Object.entries(control)
     .map(([k, v]) => `| ${k} | ${v} |`)
@@ -118,7 +163,6 @@ ${others}
 |---|---|
 | Engine | ${engine} |
 | Language | ${language} |
-| Target Platform | ${targetPlatform} |
 | IDE / Editor | ${ide} |
 | Developer | Solo |
 `;
