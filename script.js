@@ -32,3 +32,39 @@ function generate() {
 }
 
 document.getElementById('generateBtn').addEventListener('click', generate);
+
+const THEMES = {
+  dark: {
+    '--bg': '#1a1a2e', '--card-bg': '#16213e', '--card-border': '#0f3460',
+    '--accent': '#e94560', '--accent-hover': '#c73652',
+    '--text': '#e0e0e0', '--text-muted': '#a0a0b0', '--text-value': '#ffffff', '--footer': '#555570',
+  },
+  synthwave: {
+    '--bg': '#0d0015', '--card-bg': '#1a0030', '--card-border': '#6a0572',
+    '--accent': '#f72585', '--accent-hover': '#c41e6a',
+    '--text': '#e8d5f5', '--text-muted': '#b48ec9', '--text-value': '#ffffff', '--footer': '#6a4a80',
+  },
+  forest: {
+    '--bg': '#0d1f13', '--card-bg': '#132a1c', '--card-border': '#1e4a2a',
+    '--accent': '#52b788', '--accent-hover': '#3a8f6a',
+    '--text': '#d8f0e0', '--text-muted': '#8ab89a', '--text-value': '#ffffff', '--footer': '#4a7a58',
+  },
+  mono: {
+    '--bg': '#111111', '--card-bg': '#1e1e1e', '--card-border': '#333333',
+    '--accent': '#cccccc', '--accent-hover': '#999999',
+    '--text': '#dddddd', '--text-muted': '#888888', '--text-value': '#ffffff', '--footer': '#555555',
+  },
+};
+
+function applyTheme(name) {
+  const theme = THEMES[name];
+  const root = document.documentElement;
+  Object.entries(theme).forEach(([k, v]) => root.style.setProperty(k, v));
+  document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.theme === name);
+  });
+}
+
+document.querySelectorAll('.theme-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyTheme(btn.dataset.theme));
+});
