@@ -58,8 +58,9 @@ const ENGINE_DATA = {
   },
 };
 
-document.getElementById('f-engine').addEventListener('change', function () {
-  const data = ENGINE_DATA[this.value];
+function onEngineChange() {
+  const engineSelect = document.getElementById('f-engine');
+  const data = ENGINE_DATA[engineSelect.value];
   const langInput = document.getElementById('f-language');
   const ideSelect = document.getElementById('f-ide');
 
@@ -75,11 +76,14 @@ document.getElementById('f-engine').addEventListener('change', function () {
   ideSelect.innerHTML = data.ides
     .map(ide => `<option value="${ide}">${ide}</option>`)
     .join('');
-});
+}
+
+document.getElementById('f-engine').addEventListener('change', onEngineChange);
 
 document.getElementById('generateBtn').addEventListener('click', () => {
   generate();
   document.getElementById('readmeForm').classList.remove('hidden');
+  onEngineChange(); // 현재 선택된 엔진 값 즉시 반영
 });
 
 document.getElementById('downloadBtn').addEventListener('click', downloadReadme);
@@ -167,12 +171,12 @@ ${others}
 | Developer | Solo |
 `;
 
-  const blob = new Blob([md], { type: 'text/markdown' });
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
+  a.href = 'data:text/markdown;charset=utf-8,' + encodeURIComponent(md);
   a.download = 'README.md';
+  document.body.appendChild(a);
   a.click();
-  URL.revokeObjectURL(a.href);
+  document.body.removeChild(a);
 }
 
 const THEMES = {
