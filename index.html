@@ -12,12 +12,13 @@
     <p class="subtitle">1인 개발자를 위한 게임 기획 랜덤 생성기</p>
 
     <div class="theme-switcher">
-      <button class="theme-btn active" data-theme="dark"    style="background:#e94560;" title="Dark"></button>
+      <button class="theme-btn active" data-theme="dark"      style="background:#e94560;" title="Dark"></button>
       <button class="theme-btn"        data-theme="synthwave" style="background:#f72585;" title="Synthwave"></button>
-      <button class="theme-btn"        data-theme="forest"  style="background:#52b788;" title="Forest"></button>
-      <button class="theme-btn"        data-theme="mono"    style="background:#aaaaaa;" title="Monochrome"></button>
+      <button class="theme-btn"        data-theme="forest"    style="background:#52b788;" title="Forest"></button>
+      <button class="theme-btn"        data-theme="mono"      style="background:#aaaaaa;" title="Monochrome"></button>
     </div>
 
+    <!-- Player Control -->
     <section class="card">
       <h2>Player Control</h2>
       <table>
@@ -30,6 +31,69 @@
       </table>
       <button id="generateBtn" class="btn-generate">랜덤 생성</button>
     </section>
+
+    <!-- README 작성 폼 -->
+    <section class="card hidden" id="readmeForm">
+      <h2>README 작성</h2>
+
+      <div class="form-group">
+        <label>Game Title</label>
+        <input type="text" id="f-title" placeholder="My Awesome Game">
+      </div>
+
+      <div class="form-group">
+        <label>Basic Gameplay</label>
+        <textarea id="f-gameplay" rows="4" placeholder="메인 플레이 레벨에서의 핵심 게임플레이를 서술하세요.&#10;예) 적이 랜덤 위치에서 등장하고, 플레이어는 적을 최대한 많이 처치해야 합니다."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>SFX / VFX</label>
+        <textarea id="f-sfx" rows="4" placeholder="사운드 이펙트와 비주얼 이펙트를 서술하세요.&#10;예) 총소리, 적 스폰 사운드, 총격 파티클 이펙트, 적 처치 이펙트"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Mechanics</label>
+        <textarea id="f-mechanics" rows="4" placeholder="게임 난이도 조절 등 게임 메카닉을 서술하세요.&#10;예) 게임이 진행될수록 적의 스폰 속도가 빨라집니다."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>UI</label>
+        <textarea id="f-ui" rows="4" placeholder="각종 UI 화면을 서술하세요.&#10;예) 게임 시작 시 타이틀이 표시되며, 플레이어의 체력이 0이 되면 게임이 종료됩니다."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Others</label>
+        <textarea id="f-others" rows="3" placeholder="그 외 기타 사항을 서술하세요."></textarea>
+      </div>
+
+      <div class="divider"></div>
+      <h2 style="margin-bottom:16px;">Development Environment</h2>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Engine</label>
+          <input type="text" id="f-engine" placeholder="Unreal Engine 5">
+        </div>
+        <div class="form-group">
+          <label>Language</label>
+          <input type="text" id="f-language" placeholder="C++">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Target Platform</label>
+          <input type="text" id="f-targetplatform" placeholder="PC (Windows)">
+        </div>
+        <div class="form-group">
+          <label>IDE / Editor</label>
+          <input type="text" id="f-ide" placeholder="Rider, VS Code">
+        </div>
+      </div>
+
+      <button id="downloadBtn" class="btn-generate" style="margin-top:8px;">README.md 다운로드</button>
+    </section>
+
     <footer>
       <p>© 2026 roomJdev · <a href="https://github.com/roomJdev/GameDevRandomPicker" target="_blank">MIT License</a></p>
     </footer>

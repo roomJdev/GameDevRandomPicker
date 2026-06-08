@@ -31,7 +31,105 @@ function generate() {
   document.getElementById('r-action').textContent = pick(DATA.action);
 }
 
-document.getElementById('generateBtn').addEventListener('click', generate);
+document.getElementById('generateBtn').addEventListener('click', () => {
+  generate();
+  document.getElementById('readmeForm').classList.remove('hidden');
+});
+
+document.getElementById('downloadBtn').addEventListener('click', downloadReadme);
+
+function val(id) {
+  return document.getElementById(id).value.trim();
+}
+
+function downloadReadme() {
+  const control = {
+    Platform:        document.getElementById('r-platform').textContent,
+    'Camera View':   document.getElementById('r-camera').textContent,
+    Genre:           document.getElementById('r-genre').textContent,
+    'Player Role':   document.getElementById('r-role').textContent,
+    'Control Method':document.getElementById('r-control').textContent,
+    'Main Action':   document.getElementById('r-action').textContent,
+  };
+
+  const title       = val('f-title')        || 'Untitled Game';
+  const gameplay    = val('f-gameplay')     || '(미작성)';
+  const sfx         = val('f-sfx')          || '(미작성)';
+  const mechanics   = val('f-mechanics')    || '(미작성)';
+  const ui          = val('f-ui')           || '(미작성)';
+  const others      = val('f-others')       || '(미작성)';
+  const engine      = val('f-engine')       || '—';
+  const language    = val('f-language')     || '—';
+  const targetPlatform = val('f-targetplatform') || '—';
+  const ide         = val('f-ide')          || '—';
+
+  const controlTable = Object.entries(control)
+    .map(([k, v]) => `| ${k} | ${v} |`)
+    .join('\n');
+
+  const md = `# ${title}
+
+> This document describes the game design and development environment for **${title}**.
+> It is intended to provide context for AI assistants (LLMs) and collaborators.
+
+---
+
+## Player Control
+
+| Category | Value |
+|---|---|
+${controlTable}
+
+---
+
+## Basic Gameplay
+
+${gameplay}
+
+---
+
+## SFX / VFX
+
+${sfx}
+
+---
+
+## Mechanics
+
+${mechanics}
+
+---
+
+## UI
+
+${ui}
+
+---
+
+## Others
+
+${others}
+
+---
+
+## Development Environment
+
+| Item | Value |
+|---|---|
+| Engine | ${engine} |
+| Language | ${language} |
+| Target Platform | ${targetPlatform} |
+| IDE / Editor | ${ide} |
+| Developer | Solo |
+`;
+
+  const blob = new Blob([md], { type: 'text/markdown' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'README.md';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
 
 const THEMES = {
   dark: {
